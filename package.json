@@ -1,0 +1,28 @@
+{
+  "name": "contact_list_mini_fs_app",
+  "version": "1.0.0",
+  "description": "Mini Contact List applications that is based on the MERN stack",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server/index.js",
+    "dev": "NODE_ENV=development nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FarazA22/contact_list_mini_fs_app.git"
+  },
+  "author": "Faraz Akhtar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FarazA22/contact_list_mini_fs_app/issues"
+  },
+  "homepage": "https://github.com/FarazA22/contact_list_mini_fs_app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
