@@ -14,16 +14,17 @@ The intent is to set-up routing and ensure the user is able to easily navigate o
 
 Set-Up Steps
 
-7. Set-up Webpack Config
-8. Import Semantic UI
-9. Create Front End
-10. Set-Up HTTP Messages
-11. Set-Up Database
+10. Set-Up Database
+11. Set-Up HTTP Messages
 
 Completed
 
 1. Create Git Repo and pull to local repository
 2. Create server file (index.js)
 3. Create Package.json file
-4. Create basic HTML file with React Set-Up
+4. Create basic HTML file
 5. Create basic Serve file that will send back index.html
+6. Set-up Webpack Config
+7. Create React 'App' Component
+8. Import Semantic UI
+9. Create Front End
