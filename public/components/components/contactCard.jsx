@@ -14,7 +14,9 @@ function ContactCard(props) {
       </div>
       <div className="extra content">
         <div className="ui buttons">
-          <button className="ui button">Delete</button>
+          <button className="ui button" onClick={props.deleteCard}>
+            Delete
+          </button>
           <div className="or"></div>
           <button className="ui positive button">Edit</button>
         </div>

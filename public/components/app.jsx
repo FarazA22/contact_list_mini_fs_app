@@ -1,36 +1,55 @@
 import React from 'react';
 import ContactCard from './components/contactCard.jsx';
 import Button from './components/button.jsx';
+import Input from './components/input.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       contacts: [],
-      showNewContactModal: false,
-      showExistingContactModal: false,
+      name: '',
+      email: '',
+      number: '',
     };
-    this.showNewContactModal = this.showNewContactModal.bind(this);
-    this.hideNewContactModal = this.hideNewContactModal.bind(this);
-    this.showExistingContactModal = this.showExistingContactModal.bind(this);
-    this.hideExistingContactModal = this.hideExistingContactModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.deleteContact = this.deleteContact.bind(this);
   }
 
-  showNewContactModal = () => {
-    this.setState({ showNewContactModal: true });
-  };
+  handleChange(event) {
+    const key = event.target.placeholder.toLowerCase();
+    this.setState({ [key]: event.target.value });
+  }
 
-  hideNewContactModal = () => {
-    this.setState({ showNewContactModal: false });
-  };
+  handleClick(event) {
+    const { name, email, number } = this.state;
 
-  showExistingContactModal = () => {
-    this.setState({ showExistingContactModal: true });
-  };
+    const numberToNum = Number(number);
+    console.log(numberToNum);
+    if (
+      name !== '' &&
+      email !== '' &&
+      number !== '' &&
+      isNaN(numberToNum) !== true
+    ) {
+      const requestDetails = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, number: numberToNum }),
+      };
+      fetch('http://localhost:3000/api/addNewContact', requestDetails)
+        .then((response) => response.json())
+        .then((data) =>
+          this.setState({ contacts: data, name: '', number: '', email: '' })
+        );
+    }
+  }
 
-  hideExistingContactModal = () => {
-    this.setState({ hideExistingContactModal: false });
-  };
+  deleteContact(event) {
+    console.log(event);
+    console.log(name);
+  }
 
   componentDidMount() {
     fetch('http://localhost:3000/api/initial')
@@ -61,21 +80,40 @@ class App extends React.Component {
           name={name}
           email={email}
           number={number}
+          deleteCard={this.deleteContact}
         />
       );
     });
+
+    console.log(this.state.number);
 
     return (
       <div className="ui center aligned container">
         <div>
           <h1>My Contacts</h1>
-          <h4 className="ui horizontal divider header">
-            <i className="address book icon"></i>
-            ### Contacts
-          </h4>
+          <h4 className="ui horizontal divider header">Add New Contact</h4>
         </div>
         <div style={divStyle}></div>
-        <Button />
+        <Input
+          name="Name"
+          value={this.state.name}
+          updateInput={this.handleChange}
+        />
+        <Input
+          name="Email"
+          value={this.state.email}
+          updateInput={this.handleChange}
+        />
+        <Input
+          name="Number"
+          value={this.state.number}
+          updateInput={this.handleChange}
+        />
+        <Button submitContact={this.handleClick} />
+        <h4 className="ui horizontal divider header">
+          <i className="address book icon"></i>
+          {totalContacts.length} Contacts
+        </h4>
         <div className="ui padded center aligned grid">{totalContacts}</div>
       </div>
     );
