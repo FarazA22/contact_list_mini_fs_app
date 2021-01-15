@@ -30,6 +30,7 @@ contactController.deleteContact = function deleteContactFromContactCollectionBas
   next
 ) {
   const { _id: docIdInContactCollection } = req.body;
+  console.log(req.body);
   Contact.deleteOne({ _id: docIdInContactCollection }, (err, data) => {
     if (err) next(err);
     next();

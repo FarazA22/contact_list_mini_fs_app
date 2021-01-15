@@ -46,9 +46,20 @@ class App extends React.Component {
     }
   }
 
-  deleteContact(event) {
+  deleteContact(event, documentNo) {
     console.log(event);
-    console.log(name);
+    console.log(documentNo);
+    const requestDetails = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ _id: documentNo }),
+    };
+    console.log(documentNo, requestDetails);
+    fetch('http://localhost:3000/api/deleteContact', requestDetails)
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({ contacts: data, name: '', number: '', email: '' })
+      );
   }
 
   componentDidMount() {
